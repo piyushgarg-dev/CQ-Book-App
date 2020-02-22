@@ -48,7 +48,7 @@ function handelForm(e) {
   isbnTag.appendChild(document.createTextNode(isbn.value));
   bookNameTag.appendChild(document.createTextNode(bookName.value));
   authorNameTag.appendChild(document.createTextNode(authorName.value));
-  actionTag.innerHTML = `<i id="${ID}" onclick="updateBook(${ID})" data-toggle="modal" data-target=".bd-example-modal-lg" class="fas fa-edit mr-2 text-success"></i><i onclick="deleteBook(this)" id=${ID}  class="text-danger ml-2 fas fa-trash"></i>`;
+  actionTag.innerHTML = `<i id="${ID}" onclick="updateBook(${ID})" data-toggle="modal" data-target=".bd-example-modal-lg" class="fas fa-edit mr-1 text-success"></i><i onclick="deleteBook(this)" id=${ID}  class="text-danger ml-1 fas fa-trash"></i>`;
 
   tableRow.appendChild(isbnTag);
   tableRow.appendChild(bookNameTag);
@@ -122,7 +122,7 @@ window.onload = function() {
       isbnTag.appendChild(document.createTextNode(book.book.isbn));
       bookNameTag.appendChild(document.createTextNode(book.book.name));
       authorNameTag.appendChild(document.createTextNode(book.book.author));
-      actionTag.innerHTML = `<i id="${book.id}" onclick="updateBook(${book.id})" data-toggle="modal" data-target=".bd-example-modal-lg" class="fas fa-edit mr-2 text-success"></i><i onclick="deleteBook(this)" id=${book.id}  class="text-danger ml-2 fas fa-trash"></i>`;
+      actionTag.innerHTML = `<i id="${book.id}" onclick="updateBook(${book.id})" data-toggle="modal" data-target=".bd-example-modal-lg" class="fas fa-edit mr-1 text-success"></i><i onclick="deleteBook(this)" id=${book.id}  class="text-danger ml-1 fas fa-trash"></i>`;
 
       tableRow.appendChild(isbnTag);
       tableRow.appendChild(bookNameTag);
