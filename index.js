@@ -55,6 +55,10 @@ function handelForm(e) {
   };
   allBooks.push(book);
   localStorage.setItem("books", JSON.stringify(allBooks));
+
+  isbn.value = "";
+  bookName.value = "";
+  authorName.value = "";
 }
 
 // Event Listners
