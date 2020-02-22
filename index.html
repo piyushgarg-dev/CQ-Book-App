@@ -82,6 +82,54 @@
           </table>
         </div>
       </div>
+      <div
+        class="modal fade bd-example-modal-lg mt-5"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myLargeModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <h1 class="bg-dark text-center text-white p-3">Edit Book</h1>
+            <form id="update-book-form" class="container mt-2 mb-5">
+              <div class="form-group">
+                <input type="hidden" id="bookID" />
+                <label for="isbn">ISBN</label>
+                <input
+                  type="text"
+                  name="isbn"
+                  class="form-control"
+                  id="newisbn"
+                />
+              </div>
+              <div class="form-group">
+                <label for="bookname">Book Name</label>
+                <input
+                  type="text"
+                  name="bookname"
+                  class="form-control"
+                  id="newbookname"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="authorname">Author Name</label>
+                <input
+                  type="text"
+                  name="authorname"
+                  class="form-control"
+                  id="newauthorname"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary form-control">
+                Update
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </section>
     <footer></footer>
     <script src="index.js"></script>

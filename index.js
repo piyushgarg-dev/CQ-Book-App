@@ -1,6 +1,7 @@
 // Elements
 const bookForm = document.getElementById("add-book-form");
 const tableBody = document.getElementById("table-body");
+const updateBookForm = document.getElementById("update-book-form");
 
 function deleteBook(el) {
   const ID = el.id;
@@ -13,6 +14,22 @@ function deleteBook(el) {
   });
   localStorage.setItem("books", JSON.stringify(updatedList));
 }
+
+function updateBook(id) {
+  let allBooks = JSON.parse(localStorage.getItem("books"));
+  let book = allBooks.find(b => {
+    return b.id == id;
+  });
+  let newIsbn = document.getElementById("newisbn");
+  let newBook = document.getElementById("newbookname");
+  let newAuthor = document.getElementById("newauthorname");
+
+  newIsbn.value = book.book.isbn;
+  newBook.value = book.book.name;
+  newAuthor.value = book.book.author;
+  document.getElementById("bookID").value = book.id;
+}
+
 // Event Handlers
 function handelForm(e) {
   e.preventDefault();
@@ -31,7 +48,7 @@ function handelForm(e) {
   isbnTag.appendChild(document.createTextNode(isbn.value));
   bookNameTag.appendChild(document.createTextNode(bookName.value));
   authorNameTag.appendChild(document.createTextNode(authorName.value));
-  actionTag.innerHTML = `<i onclick="deleteBook(this)" id=${ID}  class="text-danger ml-2 fas fa-trash"></i>`;
+  actionTag.innerHTML = `<i id="${ID}" onclick="updateBook(${ID})" data-toggle="modal" data-target=".bd-example-modal-lg" class="fas fa-edit mr-2 text-success"></i><i onclick="deleteBook(this)" id=${ID}  class="text-danger ml-2 fas fa-trash"></i>`;
 
   tableRow.appendChild(isbnTag);
   tableRow.appendChild(bookNameTag);
@@ -61,8 +78,35 @@ function handelForm(e) {
   authorName.value = "";
 }
 
+function handelUpdateForm(e) {
+  e.preventDefault();
+  let newIsbn = document.getElementById("newisbn").value;
+  let newBook = document.getElementById("newbookname").value;
+  let newAuthor = document.getElementById("newauthorname").value;
+  const ID = document.getElementById("bookID").value;
+
+  let allBooks = JSON.parse(localStorage.getItem("books"));
+
+  let updatedBook = allBooks.filter(b => {
+    return b.id != ID;
+  });
+  let obj = {
+    id: ID,
+    book: {
+      name: newBook,
+      isbn: newIsbn,
+      author: newAuthor
+    }
+  };
+  updatedBook.push(obj);
+
+  localStorage.setItem("books", JSON.stringify(updatedBook));
+  window.location.reload();
+}
+
 // Event Listners
 bookForm.addEventListener("submit", handelForm);
+updateBookForm.addEventListener("submit", handelUpdateForm);
 
 // On Load
 window.onload = function() {
@@ -78,7 +122,7 @@ window.onload = function() {
       isbnTag.appendChild(document.createTextNode(book.book.isbn));
       bookNameTag.appendChild(document.createTextNode(book.book.name));
       authorNameTag.appendChild(document.createTextNode(book.book.author));
-      actionTag.innerHTML = `<i onclick="deleteBook(this)" id=${book.id}  class="text-danger ml-2 fas fa-trash"></i>`;
+      actionTag.innerHTML = `<i id="${book.id}" onclick="updateBook(${book.id})" data-toggle="modal" data-target=".bd-example-modal-lg" class="fas fa-edit mr-2 text-success"></i><i onclick="deleteBook(this)" id=${book.id}  class="text-danger ml-2 fas fa-trash"></i>`;
 
       tableRow.appendChild(isbnTag);
       tableRow.appendChild(bookNameTag);
